@@ -147,6 +147,116 @@
 <img width="1280" height="960" alt="image" src="https://github.com/user-attachments/assets/cfdf5856-8cd2-485d-9d15-f020aafe9ee5" />
 <img width="1280" height="960" alt="image" src="https://github.com/user-attachments/assets/98482974-2d24-4049-acae-b5c9e8006fdb" />
 
+2. Viết app sử dụng Android Studio
+
+# AndroidManifest.xml
+
+## Mô tả:
+AndroidManifest.xml là file cấu hình cốt lõi mang tính bắt buộc của mọi ứng dụng Android. Nó khai báo cấu trúc hệ thống của app với Hệ điều hành (OS), bao gồm: Tên gói (package name), các thành phần cấu thành ứng dụng (tất cả các Activity, Service, Broadcast Receiver), Icon, Tên app hiển thị, và Chủ đề (Theme). Nếu một màn hình (Activity) không được khai báo tại đây, OS sẽ chặn không cho phép nó khởi chạy.
+
+## Khai báo quyền (Permission) như thế nào?
+
+Quyền được khai báo bằng thẻ <uses-permission> đặt phía trên và nằm ngoài thẻ <application>.
+
+Ví dụ (khai báo quyền Internet): ```xml
+## Khai báo để làm gì?
+
+Android sử dụng cơ chế bảo mật cô lập (Sandbox). Việc khai báo nhằm mục đích thông báo trước cho Hệ điều hành và người dùng biết ứng dụng này cần can thiệp vào tài nguyên hay tính năng bảo mật nào của thiết bị, giúp bảo vệ an toàn quyền riêng tư.
+
+# Vòng đời của 1 ứng dụng Android (Activity Lifecycle)
+
+Một màn hình (Activity) từ khi sinh ra, hiển thị, cho đến khi bị tắt hẳn sẽ trải qua các trạng thái được quản lý bởi các hàm callback (vòng đời).
+<img width="1011" height="704" alt="image" src="https://github.com/user-attachments/assets/f7e2e6b8-03fd-4942-9f8d-504552415b59" />
+onCreate(): Chạy đầu tiên khi màn hình được khởi tạo lần đầu.
+
+onStart(): Giao diện bắt đầu xuất hiện trên màn hình nhưng chưa thể tương tác.
+
+onResume(): Màn hình hiển thị hoàn toàn trên cùng, người dùng có thể tương tác (bấm nút, gõ chữ).
+
+onPause(): Màn hình bị che khuất một phần (ví dụ: xuất hiện một hộp thoại thông báo đè lên).
+
+onStop(): Màn hình bị che khuất hoàn toàn (người dùng bấm nút Home ra ngoài).
+
+onDestroy(): Màn hình bị hủy hoàn toàn (vuốt tắt hẳn app hoặc bấm Back để thoát).
+
+## Tại sao code tự sinh sau khi tạo project có sẵn hàm onCreate()
+
+Hàm onCreate() là bắt buộc vì đây là điểm khởi đầu xây dựng nền móng của một màn hình. Nó có nhiệm vụ:
+
+Nạp và thiết lập giao diện đồ họa thông qua hàm setContentView(R.layout.activity_main);. Nếu không có hàm này, màn hình sẽ chỉ có một khoảng trắng vô hồn.
+
+Ánh xạ các đối tượng giao diện từ XML sang biến Java (findViewById).
+
+Hàm này chỉ chạy duy nhất 1 lần khi khởi tạo, tránh việc phải nạp lại giao diện gây tốn tài nguyên khi thiết bị xoay màn hình.
+
+# Code: Java Language
+
+## Check quyền để do-something (Runtime Permission)
+
+Từ Android 6.0 (API 23), với các quyền nguy hiểm (đọc thẻ nhớ, vị trí, camera), chỉ khai báo ở Manifest là chưa đủ, code Java phải check quyền lúc đang chạy.
+
+- Code cấu trúc check quyền:
+
+if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) 
+        
+        != PackageManager.PERMISSION_GRANTED) {
+    
+    // Nếu CHƯA ĐƯỢC CẤP QUYỀN -> Tiến hành yêu cầu người dùng cấp quyền
+    
+    ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 101);
+
+} else {
+   
+    // Nếu ĐÃ CÓ QUYỀN -> Thực hiện công việc
+   
+    doSomething();
+
+}
+
+- Ý nghĩa: Giúp ứng dụng không bị văng đột ngột (crash) khi thực hiện tác vụ phần cứng mà người dùng chưa cho phép, tăng tính minh bạch và an toàn dữ liệu.
+
+# Giao diện: (res/layout) mô tả bằng file XML + UI Design review
+
+## Thuộc tính text và cơ chế Tham chiếu (Tránh Hardcode)
+
+Cú pháp của việc tham chiếu: Toàn bộ chuỗi chữ (String) hiển thị thay vì gõ trực tiếp sẽ được lưu vào file res/values/strings.xml.
+
+Trong file giao diện XML, tham chiếu bằng cú pháp: @string/tên_id_chuỗi
+
+Trong file code Java, tham chiếu bằng cú pháp: R.string.tên_id_chuỗi hoặc getString(R.string.tên_id_chuỗi)
+
+Ưu điểm của việc tham chiếu: Dễ dàng quản lý dữ liệu tập trung. Khi muốn thay đổi một câu chữ xuất hiện ở nhiều nơi trên app, chỉ cần sửa đúng 1 dòng trong file strings.xml.
+
+OS hỗ trợ auto lấy giá trị theo LOCATION, LANGUAGE, THEME giúp app làm được điều gì?
+Giúp app tự động thay đổi ngôn ngữ (Tiếng Việt, Tiếng Anh...), tự động điều chỉnh định dạng vùng miền (tiền tệ, ngày tháng) và tự động chuyển đổi giao diện Sáng/Tối (Light/Dark Mode) khớp hoàn toàn với cài đặt hệ thống của điện thoại người dùng mà lập trình viên không cần viết thêm bất kỳ dòng code logic kiểm tra nào. App trở thành một ứng dụng chuẩn hóa toàn cầu.
+
+## Đối tượng chứa (ViewGroup - LinearLayout)
+
+Quy luật sắp xếp: LinearLayout gộp các đối tượng con lại và bắt chúng xếp hàng theo một chiều nhất định (android:orientation):
+
+Theo chiều dọc (vertical): Các đối tượng xếp nối tiếp nhau từ trên xuống dưới.
+
+Theo chiều ngang (horizontal): Các đối tượng xếp nối tiếp nhau từ trái sang phải.
+
+Gravity (android:gravity): Là thuộc tính quy định trọng lực nội dung – tức là điều hướng các đối tượng con hoặc chữ bên trong đối tượng chứa dịch chuyển về các vị trí mong muốn như: căn giữa (center), sang trái (left), sang phải (right).
+
+## Code tương tác với layout (Ví dụ hiển thị text tránh hardcode)
+
+Cách làm: Để hiển thị chuỗi chữ phù hợp với thiết lập LOCATION, LANGUAGE, THEME của người dùng, ta gọi hàm đặt chữ thông qua ID chuỗi đã lưu trong strings.xml.
+
+Cú pháp Java:
+
+TextView tvAbout = findViewById(R.id.tvAbout);
+
+tvAbout.setText(R.string.about_info); // Tham chiếu tới file strings.xml, hoàn toàn không gõ chữ trực tiếp
+
+
+
+
+
+
+
+
 
 
 
