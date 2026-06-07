@@ -250,17 +250,57 @@ TextView tvAbout = findViewById(R.id.tvAbout);
 
 tvAbout.setText(R.string.about_info); // Tham chiếu tới file strings.xml, hoàn toàn không gõ chữ trực tiếp
 
+## Sự kiện (Event) người dùng tác động vào app (Click)
 
+LAYOUT cần làm gì? Thành phần giao diện trong file XML (ví dụ như <Button>) cần được đặt một định danh duy nhất thông qua thuộc tính ID để code Java có thể tìm thấy.
 
+Cú pháp trong XML: android:id="@+id/btnClickMe"
 
+CODE viết như thế nào? (2 cách bắt sự kiện Click)
 
+Cách 1: Sử dụng Listener (Anonymous Inner Class - Khuyên dùng)
 
+Button btnClickMe = findViewById(R.id.btnClickMe);
 
+btnClickMe.setOnClickListener(new View.OnClickListener() {   
+   
+    @Override 
+  
+    public void onClick(View v) {
+      
+        // Viết đoạn code muốn chạy khi bấm nút vào đây
+  
+    }
 
+});
 
+Cách 2: Khai báo thuộc tính onClick trực tiếp trong XML
 
+Trong XML thêm thuộc tính: android:onClick="xuLySuKien"
 
+Trong Java viết hàm tương ứng:
 
+public void xuLySuKien(View view) {
+   // Viết đoạn code muốn chạy khi bấm nút vào đây
+}
+
+## Thư mục đặc biệt: Assets
+
+- Cú pháp truy cập vào file trong Assets:
+
+AssetManager assetManager = getAssets();
+
+InputStream is = assetManager.open("tên_file.format");
+
+- Lợi ích của việc app có sẵn các file (Offline cũng có):
+
+  + Tốc độ phản hồi cực nhanh do dữ liệu được đọc trực tiếp từ bộ nhớ cục bộ của app, không mất thời gian tải qua mạng.
+
+  + Ứng dụng hoạt động hoàn hảo ngay cả khi thiết bị không có kết nối Internet (Offline).
+
+  + Tiết kiệm chi phí vận hành server băng thông cho lập trình viên.
+
+- Ứng dụng: Thường dùng cho các app hướng dẫn du lịch offline, app đọc truyện chữ, từ điển ngoại ngữ ngoại tuyến, hoặc cẩm nang tra cứu thông tin y tế cố định.
 
 
 
