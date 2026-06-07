@@ -302,6 +302,39 @@ InputStream is = assetManager.open("tên_file.format");
 
 - Ứng dụng: Thường dùng cho các app hướng dẫn du lịch offline, app đọc truyện chữ, từ điển ngoại ngữ ngoại tuyến, hoặc cẩm nang tra cứu thông tin y tế cố định.
 
+# APP2 (android studio):  tạo app tương đương với Mit App inventor
+
+- New Project để tạo 
+<img width="1546" height="953" alt="image" src="https://github.com/user-attachments/assets/758aefa3-ba4b-4df6-935c-1ffa2c512ad9" />
+
+- click chọn emty Views Activity
+<img width="1546" height="942" alt="image" src="https://github.com/user-attachments/assets/2d53ed7a-42c9-429e-a3c2-39a7558eb3b8" />
+
+- Đặt tên Project.
+
+- Đặt vị trí lưu project
+
+- Chọn ngôn ngữ Java
+
+- > finish
+<img width="1497" height="972" alt="image" src="https://github.com/user-attachments/assets/e8da520c-c020-4706-bf00-1ab259e00e4e" />
+
+1. Cấu hình AndroidManifest.xml (Xin quyền Internet)
+<img width="1920" height="1078" alt="image" src="https://github.com/user-attachments/assets/4d49fdae-9af0-4378-9d5a-0a1d9227d64f" />
+
+2: Thêm thư viện gọi API Volley vào Gradle
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/b5662144-ba5d-4f4d-9f1c-3ee48e1d3394" />
+
+- Tạo Activity mới name là ToanHocActivity
+<img width="1514" height="1029" alt="image" src="https://github.com/user-attachments/assets/fa2aff39-87ba-42d6-9908-e3feed793c55" />
+
+- Tạo Activity mới name là WebViewActivity
+<img width="1346" height="1051" alt="image" src="https://github.com/user-attachments/assets/4c1feaaf-ff84-47cf-ab20-7699e22b69c9" />
+
+- MÀN HÌNH 1: Giới thiệu (MainActivity)
+
+- Màn hình này hiển thị thông tin sinh viên và có 2 nút bấm để chuyển trang.
+<img width="1920" height="1070" alt="image" src="https://github.com/user-attachments/assets/223de3c6-27e1-4932-905e-429654eb8707" />
 
 
 
