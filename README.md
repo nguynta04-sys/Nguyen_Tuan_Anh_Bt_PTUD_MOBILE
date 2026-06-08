@@ -194,7 +194,7 @@ Hàm này chỉ chạy duy nhất 1 lần khi khởi tạo, tránh việc phải
 ## Check quyền để do-something (Runtime Permission)
 
 Từ Android 6.0 (API 23), với các quyền nguy hiểm (đọc thẻ nhớ, vị trí, camera), chỉ khai báo ở Manifest là chưa đủ, code Java phải check quyền lúc đang chạy.
-
+```
 - Code cấu trúc check quyền:
 
 if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) 
@@ -212,7 +212,7 @@ if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.REA
     doSomething();
 
 }
-
+```
 - Ý nghĩa: Giúp ứng dụng không bị văng đột ngột (crash) khi thực hiện tác vụ phần cứng mà người dùng chưa cho phép, tăng tính minh bạch và an toàn dữ liệu.
 
 # Giao diện: (res/layout) mô tả bằng file XML + UI Design review
@@ -245,11 +245,11 @@ Gravity (android:gravity): Là thuộc tính quy định trọng lực nội dun
 Cách làm: Để hiển thị chuỗi chữ phù hợp với thiết lập LOCATION, LANGUAGE, THEME của người dùng, ta gọi hàm đặt chữ thông qua ID chuỗi đã lưu trong strings.xml.
 
 Cú pháp Java:
-
+```
 TextView tvAbout = findViewById(R.id.tvAbout);
 
 tvAbout.setText(R.string.about_info); // Tham chiếu tới file strings.xml, hoàn toàn không gõ chữ trực tiếp
-
+```
 ## Sự kiện (Event) người dùng tác động vào app (Click)
 
 LAYOUT cần làm gì? Thành phần giao diện trong file XML (ví dụ như <Button>) cần được đặt một định danh duy nhất thông qua thuộc tính ID để code Java có thể tìm thấy.
@@ -259,7 +259,7 @@ Cú pháp trong XML: android:id="@+id/btnClickMe"
 CODE viết như thế nào? (2 cách bắt sự kiện Click)
 
 Cách 1: Sử dụng Listener (Anonymous Inner Class - Khuyên dùng)
-
+```
 Button btnClickMe = findViewById(R.id.btnClickMe);
 
 btnClickMe.setOnClickListener(new View.OnClickListener() {   
@@ -273,25 +273,25 @@ btnClickMe.setOnClickListener(new View.OnClickListener() {
     }
 
 });
-
+```
 Cách 2: Khai báo thuộc tính onClick trực tiếp trong XML
 
 Trong XML thêm thuộc tính: android:onClick="xuLySuKien"
 
 Trong Java viết hàm tương ứng:
-
+```
 public void xuLySuKien(View view) {
    // Viết đoạn code muốn chạy khi bấm nút vào đây
 }
-
+```
 ## Thư mục đặc biệt: Assets
 
 - Cú pháp truy cập vào file trong Assets:
-
+```
 AssetManager assetManager = getAssets();
 
 InputStream is = assetManager.open("tên_file.format");
-
+```
 - Lợi ích của việc app có sẵn các file (Offline cũng có):
 
   + Tốc độ phản hồi cực nhanh do dữ liệu được đọc trực tiếp từ bộ nhớ cục bộ của app, không mất thời gian tải qua mạng.
@@ -336,10 +336,24 @@ InputStream is = assetManager.open("tên_file.format");
 - Màn hình này hiển thị thông tin sinh viên và có 2 nút bấm để chuyển trang.
 <img width="1920" height="1070" alt="image" src="https://github.com/user-attachments/assets/223de3c6-27e1-4932-905e-429654eb8707" />
 
+- WebViewActivity.java
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/c435508f-f36b-4830-9036-2701d4413ce1" />
 
+- ToanHocActivity.java
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/014226fc-f6bd-4dce-b7f0-4c8666173974" />
 
+- activity_main.xml
+<img width="1920" height="1077" alt="image" src="https://github.com/user-attachments/assets/4ae05445-7e80-4903-afef-ee08ffc1320e" />
 
+- activity_toaan_hoc.xml
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/d0d08ce3-ff2d-42f3-aa09-80ca8f956b69" />
 
+- activity_web_view.xml
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/434389ca-a451-4d56-b984-086da10d9644" />
 
+--> kết quả:
+<img width="1172" height="881" alt="image" src="https://github.com/user-attachments/assets/9e914b18-880e-4af0-bed0-03d8f6b980c9" />
+<img width="1162" height="872" alt="image" src="https://github.com/user-attachments/assets/63c94879-93b7-4870-bbd5-27de76cac9f7" />
+<img width="1155" height="872" alt="image" src="https://github.com/user-attachments/assets/ed9a9faf-8630-4b28-9b69-52bbd717b476" />
 
 
