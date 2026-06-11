@@ -357,4 +357,6 @@ InputStream is = assetManager.open("tên_file.format");
 <img width="1155" height="872" alt="image" src="https://github.com/user-attachments/assets/ed9a9faf-8630-4b28-9b69-52bbd717b476" />
 
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/f6ec8d56-0f83-49a6-8910-b3ad9d0bab2f" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/a6c0a0e2-b800-4f35-83a3-f0c686da0f82" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/9fe5dca8-dc1d-44bd-91f9-bf64ad16136b" />
 
